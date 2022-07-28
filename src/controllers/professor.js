@@ -26,14 +26,27 @@ exports.getById = async (req, res) => {
 }
 
 exports.post = async (req, res) => {
+    req.body.nome = req.body.nome.toUpperCase();
     const professor = new Professor(req.body);
-    await professor.save((err, data) => {
+    await Professor.findOne({ nome: req.body.nome }, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
             });
+        } else if (data) {
+            res.status(400).send({
+                message: "Professor já existe"
+            });
         } else {
-            res.status(200).send(data);
+            professor.save((err, data) => {
+                if (err) {
+                    res.status(500).send({
+                        message: err.message
+                    });
+                } else {
+                    res.status(201).send(data);
+                }
+            });
         }
     });
 }

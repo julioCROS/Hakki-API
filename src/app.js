@@ -16,8 +16,8 @@ app.use(function (req, res, next) {
 
 mongoose.connect(process.env.DB_CONNECTION.toString());
 
-const Professor = require('./models/usuario');
-const Review = require('./models/aluno');
+const Professor = require('./models/professor');
+const Review = require('./models/review');
 
 const rotaIndex = require('./routes/index.js');
 const rotaProfessor = require('./routes/professor.js');

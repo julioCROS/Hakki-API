@@ -1,11 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
-
 const Professor = new Schema({
     nome: {
         type: String,
-        required: true
-        match: [/^[a-zA-Z]{5,}+\s([a-zA-Z]+)+(\s[a-zA-Z]{0,})+$/, 'COPIE E COLE O NOME DO PROFESSOR COMO ELE APARECE NO SISTEMA DO CURSO'];
+        required: true,
+        match: [/^[A-Za-z]{4,}(\s[A-Za-z]{2,}){2,}$/, "Copie e cole o nome inteiro do professor"]
+        
     },
     reviews: [{
         type: Schema.Types.ObjectId,
@@ -13,9 +13,11 @@ const Professor = new Schema({
     }],
     mediaQualidade: {
         type: Number,
+        default: null
     },
     mediaFacilitacao: {
         type: Number,
+        default: null
     }
 });
 

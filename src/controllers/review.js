@@ -29,8 +29,14 @@ exports.post = async (req, res) => {
                         message: err.message
                     });
                 } else {
+                    if(data.reviews.length == 0){
+                        data.mediaQualidade = req.body.notaQualidade;
+                        data.mediaFacilitacao = req.body.notaFacilitacao;
+                    } else {
                     data.mediaQuality = (data.mediaQuality * data.reviews.length + req.body.notaQualidade) / (data.reviews.length + 1);
                     data.mediaFacilitation = (data.mediaFacilitation * data.reviews.length + req.body.notaFacilitacao) / (data.reviews.length + 1);
+                    data.reviews.push(review._id);
+                    }
                     data.save((err, data) => {
                         if (err) {
                             res.status(500).send({
