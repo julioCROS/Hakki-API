@@ -1,0 +1,27 @@
+{
+  "name": "hakki-api",
+  "version": "1.0.0",
+  "description": "API for Hakki WebApp and Chrome Extension.",
+  "main": "bin/server.js",
+  "scripts": {
+    "start": "node bin/server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/julioCROS/Hakki-API.git"
+  },
+  "keywords": [
+    "hakki",
+    "chrome",
+    "extension",
+    "api",
+    "web",
+    "js"
+  ],
+  "author": "Julio Cesar, Pablo Felipe",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/julioCROS/Hakki-API/issues"
+  },
+  "homepage": "https://github.com/julioCROS/Hakki-API#readme"
+}
