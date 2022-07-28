@@ -23,5 +23,13 @@
   "bugs": {
     "url": "https://github.com/julioCROS/Hakki-API/issues"
   },
-  "homepage": "https://github.com/julioCROS/Hakki-API#readme"
+  "homepage": "https://github.com/julioCROS/Hakki-API#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "debug": "^4.3.4",
+    "dotenv": "^16.0.1",
+    "express": "^4.18.1",
+    "http": "0.0.1-security",
+    "mongoose": "^6.5.0"
+  }
 }
