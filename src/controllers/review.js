@@ -1,8 +1,9 @@
 const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
+const Professor = mongoose.model('Professor');
 
-exports.getByProfessor = async (req, res) => {
-    await Review.find({ professor: req.params.id }, (err, data) => {
+exports.getByProfessor = (req, res) => {
+    Review.find({ professor: req.params.id }, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
@@ -13,41 +14,25 @@ exports.getByProfessor = async (req, res) => {
     });
 }
 
-exports.post = async (req, res) => {
+exports.post = (req, res) => {
     const review = new Review(req.body);
-    await review.save((err, data) => {
+    review.save((err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
             });
         } else {
-            res.status(200).send(data);
-            const professor = mongoose.model('Professor');
-            professor.findById(req.body.professor, (err, data) => {
-                if (err) {
-                    res.status(500).send({
-                        message: err.message
-                    });
-                } else {
-                    if(data.reviews.length == 0){
-                        data.mediaQualidade = req.body.notaQualidade;
-                        data.mediaFacilitacao = req.body.notaFacilitacao;
-                    } else {
-                    data.mediaQuality = (data.mediaQuality * data.reviews.length + req.body.notaQualidade) / (data.reviews.length + 1);
-                    data.mediaFacilitation = (data.mediaFacilitation * data.reviews.length + req.body.notaFacilitacao) / (data.reviews.length + 1);
-                    data.reviews.push(review._id);
-                    }
-                    data.save((err, data) => {
-                        if (err) {
-                            res.status(500).send({
-                                message: err.message
-                            });
-                        } else {
-                            res.status(200).send(data);
-                        }
-                    });
-                }
+            Professor.findById(req.body.professor).then(professor => {
+                if(professor.mediaFacilitacao == null) professor.mediaFacilitacao = req.body.notaFacilitacao;
+                else professor.mediaFacilitacao = (professor.mediaFacilitacao + req.body.notaFacilitacao) / 2;
+                
+                if(professor.mediaQualidade == null) professor.mediaQualidade = req.body.notaQualidade;
+                else professor.mediaQualidade = (professor.mediaQualidade + req.body.notaQualidade) / 2;
+
+                professor.reviews.push(data._id);
+                professor.save();
             });
+            res.status(201).send(data);
         }
     });
 }

@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const Professor = mongoose.model('Professor');
 
-exports.get = async (req, res) => {
-    await Professor.find((err, data) => {
+exports.get = (req, res) => {
+    Professor.find((err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
@@ -13,8 +13,8 @@ exports.get = async (req, res) => {
     }).populate('reviews');
 }
 
-exports.getById = async (req, res) => {
-    await Professor.findById(req.params.id, (err, data) => {
+exports.getById = (req, res) => {
+    Professor.findById(req.params.id, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
@@ -25,10 +25,10 @@ exports.getById = async (req, res) => {
     }).populate('reviews');
 }
 
-exports.post = async (req, res) => {
+exports.post = (req, res) => {
     req.body.nome = req.body.nome.toUpperCase();
     const professor = new Professor(req.body);
-    await Professor.findOne({ nome: req.body.nome }, (err, data) => {
+    Professor.findOne({ nome: req.body.nome }, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
