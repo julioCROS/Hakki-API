@@ -12,11 +12,15 @@ const Review = new Schema({
     },
     notaQualidade: {
         type: Number,
-        required: true
+        required: true,
+        min: 0,
+        max: 10
     },
     notaFacilitacao: {
         type: Number,
         required: true
+        min: 0,
+        max: 10
     },
     data: {
         type: Date,
