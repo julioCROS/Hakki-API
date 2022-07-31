@@ -1,3 +1,4 @@
+const accents = require('remove-accents');
 const mongoose = require('mongoose');
 const Professor = mongoose.model('Professor');
 
@@ -26,6 +27,7 @@ exports.getById = (req, res) => {
 }
 
 exports.post = (req, res) => {
+    req.body.nome = accents.remove(req.body.nome);
     req.body.nome = req.body.nome.toUpperCase();
     const professor = new Professor(req.body);
     Professor.findOne({ nome: req.body.nome }, (err, data) => {
