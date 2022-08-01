@@ -4,7 +4,7 @@ const Professor = new Schema({
     nome: {
         type: String,
         required: true,
-        match: [/^[A-Za-z]{3,}(\s[A-Za-z]{2,}){2,}$/, "Copie e cole o nome inteiro do professor"]
+        match: [/^[A-Za-z]{3,}(\s[A-Za-z’]{2,}){1,}$/, "Copie e cole o nome inteiro do professor"]
         
     },
     reviews: [{
