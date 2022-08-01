@@ -26,6 +26,19 @@ exports.getById = (req, res) => {
     }).populate('reviews');
 }
 
+exports.getByNome = (req, res) => {
+    req.params.nome = req.params.nome.toUpperCase().split('-').join(' ');
+    Professor.find({ nome: req.params.nome }, (err, data) => {
+        if (err) {
+            res.status(500).send({
+                message: err.message
+            });
+        } else {
+            res.status(200).send(data);
+        }
+    }).populate('reviews');
+}
+
 exports.post = (req, res) => {
     req.body.nome = accents.remove(req.body.nome);
     req.body.nome = req.body.nome.toUpperCase();
