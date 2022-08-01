@@ -2,6 +2,31 @@ const mongoose = require('mongoose');
 const Review = mongoose.model('Review');
 const Professor = mongoose.model('Professor');
 
+const Piii = require("piii");
+const piiiFilters = require("piii-filters");
+
+const badWordsFilter = [
+    "merd",
+    [
+      "a",
+      "inha",
+      "ao" 
+    ],
+];
+
+const removeAccents = string => string
+  .replace(/ç/g, "c")
+
+const piii = new Piii({
+    filters: [
+      Object.values(piiiFilters), badWordsFilter
+    ],
+    censor: badWord => {
+        return "❤️".repeat(badWord.length);
+    },
+    repeatead: true,
+  });
+
 exports.getByProfessor = (req, res) => {
     Review.find({ professor: req.params.id }, (err, data) => {
         if (err) {
@@ -15,6 +40,7 @@ exports.getByProfessor = (req, res) => {
 }
 
 exports.post = (req, res) => {
+    console.log(piii.filter(req.body.comentario));
     const review = new Review(req.body);
     review.save((err, data) => {
         if (err) {

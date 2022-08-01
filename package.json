@@ -32,6 +32,7 @@
     "http": "0.0.1-security",
     "mongoose": "^6.5.0",
     "piii": "^4.0.2",
+    "piii-filters": "^1.0.0",
     "remove-accents": "^0.4.2"
   }
 }
