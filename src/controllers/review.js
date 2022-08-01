@@ -40,7 +40,7 @@ exports.getByProfessor = (req, res) => {
 }
 
 exports.post = (req, res) => {
-    console.log(piii.filter(req.body.comentario));
+    req.body.comentario = piii.filter(req.body.comentario);
     const review = new Review(req.body);
     review.save((err, data) => {
         if (err) {
