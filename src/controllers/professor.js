@@ -28,7 +28,7 @@ exports.getById = (req, res) => {
 
 exports.getByNome = (req, res) => {
     req.params.nome = req.params.nome.toUpperCase().split('-').join(' ');
-    Professor.find({ nome: req.params.nome }, (err, data) => {
+    Professor.findOne({ nome: req.params.nome }, (err, data) => {
         if (err) {
             res.status(500).send({
                 message: err.message
