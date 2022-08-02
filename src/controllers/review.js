@@ -7,7 +7,7 @@ const piiiFilters = require("piii-filters");
 
 const badWordsFilter = ["merda", "merdinha", "merdao", "desgracado", "desgracada", "desgrassa", "desgraca", "desgracento", 
                         "canalha", "arrombado", "boiola", "arrombada", "coco", "bicha", "bosta", "viado", "pora",
-                        "desgramado", "desgramada", "desgramante"];
+                        "desgramado", "desgramada", "desgramante", "escroto", "escrota"];
 
 const removeAccents = string => string
   .replace(/ç/g, "c")
@@ -18,7 +18,7 @@ const piii = new Piii({
       Object.values(piiiFilters), badWordsFilter
     ],
     censor: badWord => {
-        return "❤️".repeat(badWord.length);
+        return "❤️";
     },
     repeatead: true,
     cleaner: removeAccents,
