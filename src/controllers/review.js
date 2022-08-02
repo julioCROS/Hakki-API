@@ -5,17 +5,13 @@ const Professor = mongoose.model('Professor');
 const Piii = require("piii");
 const piiiFilters = require("piii-filters");
 
-const badWordsFilter = [
-    "merd",
-    [
-      "a",
-      "inha",
-      "ao" 
-    ],
-];
+const badWordsFilter = ["merda", "merdinha", "merdao", "desgracado", "desgracada", "desgrassa" "desgraca", "desgracento", 
+                        "canalha", "arrombado", "boiola", "arrombada", "coco", "bicha", "bosta", "viado", "pora",
+                        "desgramado", "desgramada", "desgramante"];
 
 const removeAccents = string => string
   .replace(/ç/g, "c")
+  .replace(/ss/g, "c")
 
 const piii = new Piii({
     filters: [
@@ -25,6 +21,14 @@ const piii = new Piii({
         return "❤️".repeat(badWord.length);
     },
     repeatead: true,
+    cleaner: removeAccents,
+    aliases: {
+        a: ["2", "4", "@", "Á", "Ã", "À", "Â", "Ä", "Å", "Æ"],
+        e: ["3", "&", "i", "é", "ê", "è", "ë"],
+        i: ["1", "!", "|", "l", "í", "ì", "ï", "î", "Ï", "Î", "Í", "Ì"],
+        o: ["0", "*", "Ó", "Õ", "Ò", "Ô", "Ö"],
+        c: ["k", "q", "ç", "č", "ć", "ĉ", "¢", "©"],
+    }
   });
 
 exports.getByProfessor = (req, res) => {
