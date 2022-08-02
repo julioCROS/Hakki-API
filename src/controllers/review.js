@@ -5,7 +5,7 @@ const Professor = mongoose.model('Professor');
 const Piii = require("piii");
 const piiiFilters = require("piii-filters");
 
-const badWordsFilter = ["merda", "merdinha", "merdao", "desgracado", "desgracada", "desgrassa" "desgraca", "desgracento", 
+const badWordsFilter = ["merda", "merdinha", "merdao", "desgracado", "desgracada", "desgrassa", "desgraca", "desgracento", 
                         "canalha", "arrombado", "boiola", "arrombada", "coco", "bicha", "bosta", "viado", "pora",
                         "desgramado", "desgramada", "desgramante"];
 
