@@ -8,7 +8,8 @@ const Review = new Schema({
     },
     comentario: {
         type: String,
-        required: true
+        required: true,
+        maxlength: 250
     },
     notaQualidade: {
         type: Number,
