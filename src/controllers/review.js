@@ -45,6 +45,9 @@ exports.getByProfessor = (req, res) => {
 
 exports.post = (req, res) => {
     req.body.comentario = piii.filter(req.body.comentario);
+    let facilitacao = req.body.notaFacilitacao;
+    let qualidade = req.body.notaQualidade;
+
     const review = new Review(req.body);
     review.save((err, data) => {
         if (err) {
@@ -52,13 +55,28 @@ exports.post = (req, res) => {
                 message: err.message
             });
         } else {
-            Professor.findById(req.body.professor).then(professor => {
+            Professor.findById(req.body.professor)
+            .populate('reviews')
+            .then(professor => {
                 if(professor.mediaFacilitacao == null) professor.mediaFacilitacao = req.body.notaFacilitacao;
-                else professor.mediaFacilitacao = (professor.mediaFacilitacao + req.body.notaFacilitacao) / (professor.reviews.length + 1);
+                else {
+                    for(let i = 0; i < professor.reviews.length; i++) {
+                        facilitacao += professor.reviews[i].notaFacilitacao;
+                    }
+                    facilitacao = facilitacao / (professor.reviews.length + 1);
+                    professor.mediaFacilitacao = facilitacao;
+                }
     
                 
                 if(professor.mediaQualidade == null) professor.mediaQualidade = req.body.notaQualidade;
-                else professor.mediaQualidade = (professor.mediaQualidade + req.body.notaQualidade) / (professor.reviews.length + 1);
+                else {                    
+                    for(let i = 0; i < professor.reviews.length; i++) {
+                        qualidade += professor.reviews[i].notaQualidade;
+                    }
+                    
+                    qualidade = qualidade / (professor.reviews.length + 1);
+                    professor.mediaQualidade = qualidade;
+                }
 
                 professor.reviews.push(data._id);
                 professor.save();
