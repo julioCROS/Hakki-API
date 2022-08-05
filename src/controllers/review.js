@@ -4,10 +4,10 @@ const Professor = mongoose.model('Professor');
 
 const Piii = require("piii");
 const piiiFilters = require("piii-filters");
+const dotenv = require('dotenv');
+dotenv.config();
 
-const badWordsFilter = ["merda", "merdinha", "merdao", "desgracado", "desgracada", "desgrassa", "desgraca", "desgracento", 
-                        "canalha", "arrombado", "boiola", "arrombada", "coco", "bicha", "bosta", "viado", "pora",
-                        "desgramado", "desgramada", "desgramante", "escroto", "escrota"];
+const badWordsFilter = process.env.BAD_WORDS.split(" ");
 
 const removeAccents = string => string
   .replace(/ç/g, "c")
