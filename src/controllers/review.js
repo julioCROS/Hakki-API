@@ -17,9 +17,6 @@ const piii = new Piii({
     filters: [
       Object.values(piiiFilters), badWordsFilter
     ],
-    censor: badWord => {
-        return "❤️";
-    },
     repeatead: true,
     cleaner: removeAccents,
     aliases: {
