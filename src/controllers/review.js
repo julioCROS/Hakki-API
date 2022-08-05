@@ -54,10 +54,11 @@ exports.post = (req, res) => {
         } else {
             Professor.findById(req.body.professor).then(professor => {
                 if(professor.mediaFacilitacao == null) professor.mediaFacilitacao = req.body.notaFacilitacao;
-                else professor.mediaFacilitacao = (professor.mediaFacilitacao + req.body.notaFacilitacao) / 2;
+                else professor.mediaFacilitacao = (professor.mediaFacilitacao + req.body.notaFacilitacao) / (professor.reviews.length + 1);
+    
                 
                 if(professor.mediaQualidade == null) professor.mediaQualidade = req.body.notaQualidade;
-                else professor.mediaQualidade = (professor.mediaQualidade + req.body.notaQualidade) / 2;
+                else professor.mediaQualidade = (professor.mediaQualidade + req.body.notaQualidade) / (professor.reviews.length + 1);
 
                 professor.reviews.push(data._id);
                 professor.save();
