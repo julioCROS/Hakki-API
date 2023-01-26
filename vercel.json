@@ -1,23 +1,17 @@
 {
+  "name": "hakki-api",
   "version": 2,
+  "public": true,
   "builds": [
     {
       "src": "bin/server.js",
-      "use": "@now/node"
+      "use": "@vercel/node"
     }
   ],
   "routes": [
     {
-      "src": "/",
-      "dest": "routes/index.js"
-    },
-    {
-      "src": "/professores",
-      "dest": "routes/professor.js"
-    },
-    {
-      "src": "/reviews",
-      "dest": "routes/review.js"
+      "src": "/(.*)",
+      "dest": "src/app.js"
     }
   ]
 }
