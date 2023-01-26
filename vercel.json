@@ -1,0 +1,23 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "bin/server.js",
+      "use": "@now/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/",
+      "dest": "routes/index.js"
+    },
+    {
+      "src": "/professores",
+      "dest": "routes/professor.js"
+    },
+    {
+      "src": "/reviews",
+      "dest": "routes/review.js"
+    }
+  ]
+}
